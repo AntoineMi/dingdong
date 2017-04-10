@@ -1,3 +1,3 @@
-int fonction(a) {
+int function(a) {
     return a+1;
 }
