@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 #include "functions.h"
 
 FILE * testFile;
@@ -17,7 +18,7 @@ int main(int argc, char** argv) {
     
     SDL_Surface* screen = NULL;
     if(NULL == (screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL, 
-        SDL_DOUBLEBUF))) {
+        SDL_DOUBLEBUF | SDL_RESIZABLE))) {
         fprintf(stderr, "Impossible d'ouvrir la fenetre. Fin du programme.\n");
         return EXIT_FAILURE;
     }
@@ -35,7 +36,7 @@ int main(int argc, char** argv) {
     while(loop) {
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
-        
+        SDL_BlitSurface(framebuffer, NULL, screen, NULL);
         
         /******************************************
          *               CODE DU JEU              *
@@ -43,9 +44,44 @@ int main(int argc, char** argv) {
         
         Ball b;
         b.speed = 1;
-        testFile = fopen ("tests", "w+");
+        b.x = 0;
+        b.y = 0;
+        b.dx = 1;
+        b.dy = 0;
+
+        SDL_Surface * img = NULL;
+            SDL_Rect center;
+            center.x = 400;
+            center.y = 300;
+            center.h = 15;
+            center.w = 15;
+            img = IMG_Load("img/ball.png");
+            SDL_BlitSurface(img, NULL, screen, &center);
+        SDL_Flip(screen);
+
+        if(b.dx != 0 || b.dy != 0) {
+            b.x += b.dx;
+            b.y += b.dy;
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*testFile = fopen ("tests", "w+");
         fprintf(testFile, "%d\n", b.speed);
-        fclose(testFile);
+        fclose(testFile);*/
 
         /******************************************/
 
