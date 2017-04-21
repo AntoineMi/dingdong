@@ -55,9 +55,8 @@ int main(int argc, char** argv) {
             center.y = 300;
             center.h = 15;
             center.w = 15;
-            img = IMG_Load("img/ball.png");
+            img = IMG_Load("img/ball.gif");
             SDL_BlitSurface(img, NULL, screen, &center);
-        SDL_Flip(screen);
 
         if(b.dx != 0 || b.dy != 0) {
             b.x += b.dx;
@@ -85,9 +84,6 @@ int main(int argc, char** argv) {
 
         /******************************************/
 
-
-        /* On copie le framebuffer à l'écran */
-        SDL_BlitSurface(framebuffer, NULL, screen, NULL);
         
         SDL_Flip(screen);
     
