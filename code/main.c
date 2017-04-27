@@ -47,10 +47,20 @@ int main(int argc, char** argv) {
     
     Ball b;
         b.speed = 1;
-        b.x = 400;
-        b.y = 300;
-        b.dx = 1;
+        b.x = 393;
+        b.y = 293;
+        b.dx = 0;
         b.dy = 0;
+
+    Bar bar1;
+        bar1.speed = 1;
+        bar1.x = 350;
+        bar1.y = 10;
+
+    Bar bar2;
+        bar2.speed = 1;
+        bar2.x = 350;
+        bar2.y = 580;
     
     /**
      * loop = 1 --> fenêtre SDL active
@@ -63,25 +73,39 @@ int main(int argc, char** argv) {
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
         
-        
+        /* Placement des images */
+        SDL_Surface *img = NULL;
+        SDL_Rect center;
 
-        SDL_Surface * img = NULL;
-            SDL_Rect center;
+            /* Balle */
             center.x = b.x;
             center.y = b.y;
             center.h = 15;
             center.w = 15;
-            img = IMG_Load("img/ball.gif");
+            img = IMG_Load("img/ball.png");
+            SDL_BlitSurface(img, NULL, screen, &center);
+            
+
+            /* Barres */
+            center.x = bar1.x;
+            center.y = bar1.y;
+            center.h = 10;
+            center.w = 100;
+            img = IMG_Load("img/bar.png");
             SDL_BlitSurface(img, NULL, screen, &center);
 
-        if(b.dx != 0 || b.dy != 0) {
-            b.x += b.dx;
-            b.y += b.dy;
-            printf("%d\n", b.x);
-        }
+            center.x = bar2.x;
+            center.y = bar2.y;
+            center.h = 10;
+            center.w = 100;
+            img = IMG_Load("img/bar.png");
+            SDL_BlitSurface(img, NULL, screen, &center);
         
 
-
+            if(b.dx != 0 || b.dy != 0) {
+                b.x += b.dx * b.speed;
+                b.y += b.dy * b.speed;
+            }
 
 
 
@@ -120,8 +144,16 @@ int main(int argc, char** argv) {
               switch(e.key.keysym.sym){
                 
                 case SDLK_ESCAPE: 
-                    loop = 0;
-                    break;
+                  loop = 0;
+                  break;
+
+                case SDLK_LEFT: 
+                  playerMove(&bar1, 0);
+                  break;
+
+                case SDLK_RIGHT: 
+                  playerMove(&bar1, 1);
+                  break;
 
                 case 'a':
                   printf("Vous avez appué sur 'a'\n");

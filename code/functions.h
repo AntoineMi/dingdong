@@ -27,3 +27,10 @@ typedef struct Player {
     unsigned int health;
     unsigned int theme;
 } Player;
+
+void playerMove(Bar *bar, int dir) {
+    if(dir)
+        bar->x -= 1 * bar->speed;
+    else
+        bar->x += 1 * bar->speed;
+}
