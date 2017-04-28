@@ -4,7 +4,6 @@
 #include <SDL/SDL_image.h>
 #include "ball.h"
 #include "bar.h"
-#include "game.h"
 #include "player.h"
 
 FILE * settings;
@@ -50,7 +49,12 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
-    drawBall();
+    Ball b;
+        b.speed = 1;
+        b.x = 393;
+        b.y = 293;
+        b.dx = 0;
+        b.dy = 0;
 
     Bar bar1;
         bar1.speed = 1;
