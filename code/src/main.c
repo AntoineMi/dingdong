@@ -4,6 +4,7 @@
 #include <SDL/SDL_image.h>
 #include "ball.h"
 #include "bar.h"
+#include "game.h"
 #include "player.h"
 
 FILE * settings;
@@ -21,7 +22,6 @@ int main() {
     }
     
     /* Création de la fenêtre (screen) */
-    SDL_Surface* screen = NULL;
     if(NULL == (screen = SDL_SetVideoMode(
       WINDOW_WIDTH,
       WINDOW_HEIGHT,
@@ -49,12 +49,7 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
-    Ball b;
-        b.speed = 1;
-        b.x = 393;
-        b.y = 293;
-        b.dx = 0;
-        b.dy = 0;
+    initBall(b);
 
     Bar bar1;
         bar1.speed = 1;
@@ -76,10 +71,6 @@ int main() {
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
-        
-        /* Placement des images */
-        SDL_Surface *img = NULL;
-        SDL_Rect center;
 
             /* Balle */
             center.x = b.x;

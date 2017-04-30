@@ -6,3 +6,8 @@ typedef struct Ball {
     float dx, dy;
     unsigned int speed;
 } Ball;
+
+void initBall();
+void drawBall();
+
+Ball b;
