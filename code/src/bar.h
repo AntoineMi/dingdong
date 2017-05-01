@@ -12,4 +12,8 @@ typedef struct Bar {
  * @param bar Barre 1 ou 2
  * @param dir Direction gauche (1) ou droite (0)
  */
-void barMove(Bar *bar, int dir);
+void moveBar(Bar *bar, int dir);
+void initBars();
+
+Bar bar1;
+Bar bar2;

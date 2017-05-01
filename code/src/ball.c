@@ -2,22 +2,23 @@
 #include <SDL/SDL_image.h>
 
 #include "ball.h"
+#include "bar.h"
 #include "game.h"
 
 void initBall() {
     b.speed = 1;
-    b.x = 393;
-    b.y = 293;
+    b.x = 392;
+    b.y = 292;
     b.dx = 1;
-    b.dy = 0;
+    b.dy = 1;
     printf("Balle initialisée\n");
 }
 
 void drawBall() {
     center.x = b.x;
     center.y = b.y;
-    center.h = 15;
-    center.w = 15;
+    center.h = 16;
+    center.w = 16;
     img = IMG_Load("ball.png");
     SDL_BlitSurface(img, NULL, screen, &center);
 }
@@ -25,15 +26,33 @@ void drawBall() {
 void bounceBall() {
     b.dx -= b.dx * 2;
     b.dy -= b.dy * 2;
+    printf("x = %d y = %d\n", b.x, b.y);
+}
+
+void deathBall() {
+    b.dx = 0;
+    b.dy = 0;
+    printf("x = %d y = %d\n", b.x, b.y);
+    printf("Game over!\n");
 }
 
 void moveBall() {
     if(b.dx != 0 || b.dy != 0) {
-        if (b.x + b.dx * b.speed > 15 && b.x + b.dx * b.speed < 785) {
+        if (b.x + b.dx * b.speed > 8 && b.x + b.dx * b.speed < 792) {
             b.x += b.dx * b.speed;
         } else bounceBall();
-        if (b.y + b.dy * b.speed > 15 && b.y + b.dy * b.speed < 585) {
+        if (b.y + b.dy * b.speed > 8 && b.y + b.dy * b.speed < 592) {
             b.y += b.dy * b.speed;
-        } else bounceBall();
+        } else deathBall();
+
+        if (b.x >= bar1.x &&
+            b.x <= bar1.x + 100 &&
+            b.y == 28)
+            bounceBall();
+        if (b.x >= bar2.x &&
+            b.x <= bar2.x + 100 &&
+            b.y == 572)
+            bounceBall();
+
     }
 }

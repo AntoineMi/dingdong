@@ -10,6 +10,7 @@ typedef struct Ball {
 void initBall();
 void drawBall();
 void moveBall();
+void deathBall();
 void bounceBall();
 
 Ball b;

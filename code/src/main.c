@@ -50,16 +50,7 @@ int main() {
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
     initBall();
-
-    Bar bar1;
-        bar1.speed = 1;
-        bar1.x = 350;
-        bar1.y = 10;
-
-    Bar bar2;
-        bar2.speed = 1;
-        bar2.x = 350;
-        bar2.y = 580;
+    initBars();
     
     /**
      * loop = 1 --> fenêtre SDL active
@@ -75,8 +66,8 @@ int main() {
             /* Balle */
             center.x = b.x;
             center.y = b.y;
-            center.h = 15;
-            center.w = 15;
+            center.h = 16;
+            center.w = 16;
             img = IMG_Load("img/ball.png");
             SDL_BlitSurface(img, NULL, screen, &center);
             
@@ -104,12 +95,12 @@ int main() {
             keyboard = SDL_GetKeyState(NULL);
 
         /* Déplacement joueur 1 */
-        if (keyboard[SDLK_LEFT]) barMove(&bar1, 1);
-        if (keyboard[SDLK_RIGHT]) barMove(&bar1, 0);
+        if (keyboard[SDLK_LEFT]) moveBar(&bar1, 1);
+        if (keyboard[SDLK_RIGHT]) moveBar(&bar1, 0);
 
         /* Déplacement joueur 2 */
-        if (keyboard['q']) barMove(&bar2, 1);
-        if (keyboard['d']) barMove(&bar2, 0);
+        if (keyboard['q']) moveBar(&bar2, 1);
+        if (keyboard['d']) moveBar(&bar2, 0);
 
         if (keyboard[SDLK_ESCAPE]) loop = 0;
 
