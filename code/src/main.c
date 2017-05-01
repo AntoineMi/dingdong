@@ -49,7 +49,7 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
-    initBall(b);
+    initBall();
 
     Bar bar1;
         bar1.speed = 1;
@@ -80,7 +80,6 @@ int main() {
             img = IMG_Load("img/ball.png");
             SDL_BlitSurface(img, NULL, screen, &center);
             
-
             /* Barres */
             center.x = bar1.x;
             center.y = bar1.y;
@@ -95,15 +94,9 @@ int main() {
             center.w = 100;
             img = IMG_Load("img/bar.png");
             SDL_BlitSurface(img, NULL, screen, &center);
-        
-
-            if(b.dx != 0 || b.dy != 0) {
-                b.x += b.dx * b.speed;
-                b.y += b.dy * b.speed;
-            }
 
 
-
+            moveBall();
 
 
 

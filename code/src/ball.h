@@ -9,5 +9,7 @@ typedef struct Ball {
 
 void initBall();
 void drawBall();
+void moveBall();
+void bounceBall();
 
 Ball b;
