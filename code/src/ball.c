@@ -9,7 +9,7 @@ void initBall() {
     b.x = 393;
     b.y = 293;
     b.dx = 1;
-    b.dy = 2;
+    b.dy = 0;
     printf("Balle initialisée\n");
 }
 
@@ -29,10 +29,11 @@ void bounceBall() {
 
 void moveBall() {
     if(b.dx != 0 || b.dy != 0) {
-        if (b.x + b.dx * b.speed > 15 && b.x + b.dx * b.speed < 785)
+        if (b.x + b.dx * b.speed > 15 && b.x + b.dx * b.speed < 785) {
             b.x += b.dx * b.speed;
-        if (b.y + b.dy * b.speed > 15 && b.y + b.dy * b.speed < 585)
+        } else bounceBall();
+        if (b.y + b.dy * b.speed > 15 && b.y + b.dy * b.speed < 585) {
             b.y += b.dy * b.speed;
-        else bounceBall();
+        } else bounceBall();
     }
 }
