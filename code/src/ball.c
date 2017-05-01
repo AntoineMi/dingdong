@@ -38,20 +38,23 @@ void deathBall() {
 
 void moveBall() {
     if(b.dx != 0 || b.dy != 0) {
+        /* côtés */
         if (b.x + b.dx * b.speed > 8 && b.x + b.dx * b.speed < 792) {
             b.x += b.dx * b.speed;
         } else bounceBall();
-        if (b.y + b.dy * b.speed > 8 && b.y + b.dy * b.speed < 592) {
+
+        /* haut / bas */
+        if (b.y + b.dy * b.speed > 0 && b.y + b.dy * b.speed < 584) {
             b.y += b.dy * b.speed;
         } else deathBall();
 
         if (b.x >= bar1.x &&
             b.x <= bar1.x + 100 &&
-            b.y == 28)
+            b.y == 20)
             bounceBall();
         if (b.x >= bar2.x &&
             b.x <= bar2.x + 100 &&
-            b.y == 572)
+            b.y == 564)
             bounceBall();
 
     }
