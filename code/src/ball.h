@@ -11,7 +11,7 @@ void initBall();
 void drawBall();
 void moveBall();
 void deathBall();
-void bounceBall(int surface);
+void bounceBall(int isSide);
 
 Ball b;
 
