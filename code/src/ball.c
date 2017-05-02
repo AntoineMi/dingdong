@@ -23,10 +23,11 @@ void drawBall() {
     SDL_BlitSurface(img, NULL, screen, &center);
 }
 
-void bounceBall() {
-    b.dx -= b.dx * 2;
-    b.dy -= b.dy * 2;
-    printf("x = %d y = %d\n", b.x, b.y);
+void bounceBall(int isSide) {
+    if (isSide) /* côtés */
+        b.dx = -b.dx;
+    else /* haut/bas */
+        b.dy = -b.dy;
 }
 
 void deathBall() {
@@ -38,24 +39,27 @@ void deathBall() {
 
 void moveBall() {
     if(b.dx != 0 || b.dy != 0) {
-        /* côtés */
-        if (b.x + b.dx * b.speed > 8 && b.x + b.dx * b.speed < 792) {
-            b.x += b.dx * b.speed;
-        } else bounceBall();
-
-        /* haut / bas */
-        if (b.y + b.dy * b.speed > 0 && b.y + b.dy * b.speed < 584) {
-            b.y += b.dy * b.speed;
+        targetX = b.x + b.dx * b.speed;
+        targetY = b.y + b.dy * b.speed;
+        if (targetX > 8 && targetX < 792) {
+            b.x = targetX;
+        }
+        if (targetY > 0 && targetY < 584) {
+            b.y = targetY;
         } else deathBall();
+        
+        /* côtés */
+        if (targetX <= 8 || targetX >= 792) {
+            bounceBall(1);
+        }
 
-        if (b.x >= bar1.x &&
-            b.x <= bar1.x + 100 &&
-            b.y == 20)
-            bounceBall();
-        if (b.x >= bar2.x &&
-            b.x <= bar2.x + 100 &&
-            b.y == 564)
-            bounceBall();
-
+        /* barres */
+        if ((b.x >= bar1.x &&
+             b.x <= bar1.x + 100 &&
+             b.y == 20) ||
+            (b.x >= bar2.x &&
+             b.x <= bar2.x + 100 &&
+             b.y == 564))
+            bounceBall(0);
     }
 }

@@ -1,7 +1,9 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include "ball.h"
 #include "bar.h"
 #include "game.h"
@@ -9,7 +11,7 @@
 
 FILE * settings;
 
-static unsigned int WINDOW_WIDTH = 800;
+static unsigned int WINDOW_WIDTH = 1000;
 static unsigned int WINDOW_HEIGHT = 600;
 static const unsigned int BIT_PER_PIXEL = 32;
 
@@ -62,6 +64,14 @@ int main() {
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
+
+            center.x = 800;
+            center.y = 0;
+            center.h = 200;
+            center.w = 600;
+            img = IMG_Load("img/bg_ui.png");
+            SDL_BlitSurface(img, NULL, screen, &center);
+
 
             /* Balle */
             center.x = b.x;

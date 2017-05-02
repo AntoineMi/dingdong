@@ -11,6 +11,10 @@ void initBall();
 void drawBall();
 void moveBall();
 void deathBall();
-void bounceBall();
+void bounceBall(int surface);
 
 Ball b;
+
+/* Positions à la prochaine frame */
+int targetX;
+int targetY;
