@@ -1,19 +1,27 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include "ball.h"
 #include "bar.h"
+#include "brick.h"
 #include "game.h"
 #include "player.h"
-
-FILE * settings;
 
 static unsigned int WINDOW_WIDTH = 1000;
 static unsigned int WINDOW_HEIGHT = 600;
 static const unsigned int BIT_PER_PIXEL = 32;
+
+/*void reshape() {
+    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+}*/
 
 int main() {
     
@@ -53,6 +61,7 @@ int main() {
 
     initBall();
     initBars();
+    Brick brArray[MAX_BRICKS];
     
     /**
      * loop = 1 --> fenêtre SDL active
@@ -65,6 +74,9 @@ int main() {
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
 
+        /* DESSIN */
+
+            /* Zone de jeu */
             center.x = 800;
             center.y = 0;
             center.h = 200;
@@ -98,6 +110,9 @@ int main() {
 
 
             moveBall();
+
+            
+            /*drawBrick(br);*/
 
 
 

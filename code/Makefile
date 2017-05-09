@@ -1,4 +1,4 @@
-LIB       = -lSDL -lSDLmain -lSDL_image -lSDL_ttf -lm
+LIB       = -lSDL -lGL -lGLU -lSDLmain -lSDL_image -lSDL_ttf -lm
 CFLAGS    = -W -Wall -ansi
 
 SRC_PATH  = src

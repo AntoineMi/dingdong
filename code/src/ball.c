@@ -55,10 +55,10 @@ void moveBall() {
 
         /* barres */
         if ((b.x >= bar1.x &&
-             b.x <= bar1.x + 100 &&
+             b.x <= (bar1.x - 5) + 105 &&
              b.y == 20) ||
             (b.x >= bar2.x &&
-             b.x <= bar2.x + 100 &&
+             b.x <= (bar2.x - 5) + 105 &&
              b.y == 564))
             bounceBall(0);
     }
