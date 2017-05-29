@@ -13,8 +13,9 @@ Brick initBrick(int x, int y, int bonus) {
 }
 
 void initBrickArray(Brick brArray[600][300]) {
-    int gridX = 385 - ((brArrayW * 30));
-    int gridY = 285 - ((brArrayH * 30));
+    int gridX = 385 - ((game.gridW * 30) / 2) + 15;
+    int gridY = 285 - ((game.gridH * 30) / 2) + 15;
+    printf("gridX = %d\ngridY = %d\n", gridX, gridY);
     
     int i, j;
     for (i = 0; i < game.gridH; i++) {
@@ -22,7 +23,7 @@ void initBrickArray(Brick brArray[600][300]) {
             brArray[i][j] = initBrick(gridX, gridY, settingsArray[i]);
             gridX += 30;
         }
-        gridX = 385 - ((brArrayW * 30) / 2);
+        gridX = 385 - ((game.gridW * 30) / 2) + 15;
         gridY += 30;
     }
 }

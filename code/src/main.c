@@ -60,7 +60,7 @@ int main() {
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
     
-    int settingsArray[] = {8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int settingsArray[] = {9, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
     readSettings(&game, settingsArray);
 
