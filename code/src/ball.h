@@ -1,3 +1,6 @@
+#ifndef HEADER_BALL
+#define HEADER_BALL
+
 /**
  * Balle avec une position x, y et une vitesse
  */
@@ -18,3 +21,5 @@ Ball b;
 /* Positions à la prochaine frame */
 int targetX;
 int targetY;
+
+#endif
