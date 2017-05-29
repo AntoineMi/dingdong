@@ -13,7 +13,6 @@ Brick initBrick(int x, int y, int bonus) {
 }
 
 void initBrickArray(Brick **brArray) {
-    int gridSize = brArrayW * brArrayH;
     int gridX = 385 - ((brArrayW * 30) / 2);
     int gridY = 285 - ((brArrayH * 30) / 2);
     

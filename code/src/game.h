@@ -1,11 +1,15 @@
+#ifndef HEADER_GAME
+#define HEADER_GAME
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include "brick.h"
 
 typedef struct Game {
     int gridW, gridH;
-    Brick brArray[MAX_BRICKS_W][MAX_BRICKS_H];
+    Brick **brArray[600][300];
 } Game;
 
 SDL_Surface *framebuffer;
@@ -17,3 +21,5 @@ FILE *fp;
 
 void initGame();
 void readSettings(Game *game, int *settingsArray);
+
+#endif

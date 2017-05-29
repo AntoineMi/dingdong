@@ -1,3 +1,6 @@
+#ifndef HEADER_BRICK
+#define HEADER_BRICK
+
 #define MAX_BRICKS_W 600 /* 600px */
 #define MAX_BRICKS_H 300 /* 300px */
 #define MAX_BRICKS 200
@@ -17,7 +20,6 @@ int settingsArray[MAX_BRICKS];
 
 int brArrayW, brArrayH;
 int brCount;
-Brick brArray[];
 
 /*Brick brArray[] = malloc(sizeof(Brick) * MAX_BRICKS);*/
 
@@ -35,3 +37,5 @@ void drawSquare();
 void drawBrick(Brick br);
 
 */
+
+#endif
