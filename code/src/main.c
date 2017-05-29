@@ -64,7 +64,8 @@ int main() {
     
     readSettings(&game, settingsArray);
 
-    initBall();
+    initBall(&b1, 392, 100);
+    initBall(&b2, 392, 492);
     initBars();
 
     initBrickArray(game.brArray);
@@ -91,13 +92,9 @@ int main() {
             SDL_BlitSurface(img, NULL, screen, &center);
 
 
-            /* Balle */
-            center.x = b.x;
-            center.y = b.y;
-            center.h = 16;
-            center.w = 16;
-            img = IMG_Load("img/ball.png");
-            SDL_BlitSurface(img, NULL, screen, &center);
+            /* Balles */
+            drawBall(b1);
+            drawBall(b2);
             
             /* Barres */
             center.x = bar1.x;
@@ -117,7 +114,7 @@ int main() {
             /* Briques */
             drawBricks();
 
-            moveBall();
+            moveBall(&b1);
 
 
 

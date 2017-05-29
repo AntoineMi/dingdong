@@ -10,13 +10,13 @@ typedef struct Ball {
     unsigned int speed;
 } Ball;
 
-void initBall();
-void drawBall();
-void moveBall();
-void deathBall();
-void bounceBall(int isSide);
+void initBall(Ball *b, int x, int y);
+void drawBall(Ball b);
+void moveBall(Ball *b);
+void deathBall(Ball *b);
+void bounceBall(Ball *b, int isSide);
 
-Ball b;
+Ball b1, b2;
 
 /* Positions à la prochaine frame */
 int targetX;
