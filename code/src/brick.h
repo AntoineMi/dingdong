@@ -1,4 +1,7 @@
-#include "game.h"
+#define MAX_BRICKS_W 600 /* 600px */
+#define MAX_BRICKS_H 300 /* 300px */
+#define MAX_BRICKS 200
+#define BRICK_SIZE 30
 
 /**
  * Brique avec une position x, y, un état alive/dead et une couleur RVB
@@ -13,14 +16,15 @@ typedef struct Brick {
 int settingsArray[MAX_BRICKS];
 
 int brArrayW, brArrayH;
+int brCount;
+Brick brArray[];
 
-
-Brick brArray[MAX_BRICKS];
 /*Brick brArray[] = malloc(sizeof(Brick) * MAX_BRICKS);*/
 
 
 Brick initBrick(int x, int y, int bonus);
-void initBrickArray(int settingsArray);
+void initBrickArray(Brick **brArray);
+void drawBrick();
 void deathBrick();
 
 void readSettings();

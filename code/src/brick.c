@@ -12,52 +12,34 @@ Brick initBrick(int x, int y, int bonus) {
     return br;
 }
 
-
-int settingsArray[] = {5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-void readSettings() {
-    fp = fopen("settings","r");
-
-    if(fp == NULL)
-        printf("Error while opening the file.\n");
-    
-    /*  
-    while( ( ch = fgetc(fp) ) != EOF )
-        printf("%c",ch);
-    */
- 
-    fclose(fp);
-
-    brArrayW = 0; /* settings.x * 30 */
-    brArrayH = 0; /* settings.y * 30 */
-
-    if (brArrayW > MAX_BRICKS_W)
-        brArrayW = MAX_BRICKS_W;
-    else if (brArrayW < 0)
-        brArrayW = 0;
-
-    if (brArrayH > MAX_BRICKS_H)
-        brArrayH = MAX_BRICKS_H;
-    else if (brArrayH < 0)
-        brArrayH = 0;
-}
-
-void initBrickArray(int settingsArray) {
-    int gridSize = brArrayW * brArrayH, i;
+void initBrickArray(Brick **brArray) {
+    int gridSize = brArrayW * brArrayH;
     int gridX = 385 - ((brArrayW * 30) / 2);
     int gridY = 285 - ((brArrayH * 30) / 2);
     
-    for (i = 0; i <= gridSize - 1; i++) {
-        brArray[i] = initBrick(
-            gridX,
-            gridY,
-            settingsArray[i]
-            );
+    int i, j;
+    for (i = 0; i < game.gridW; i++) {
+        for (j = 0; j < game.gridH; j++) {
+            brArray[i][j] = initBrick(gridX, gridY, settingsArray[i]);
+            gridY += 30;
+        }
+        gridY = 285 - ((brArrayH * 30) / 2);
         gridX += 30;
-        gridY += 30;
     }
 }
 
+void drawBrick() {
+    int i;
+    for (i = 2; i < brCount; i++) {
+        center.x = brArray[i].x;
+        center.y = brArray[i].y;
+        center.h = 30;
+        center.w = 30;
+        img = IMG_Load("img/brick.png");
+        SDL_BlitSurface(img, NULL, screen, &center);
+        printf("i = %d\n", i);
+    }
+}
 
 
 /* OpenGL

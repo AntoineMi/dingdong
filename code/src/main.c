@@ -59,9 +59,15 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
+    Game game;
+    int settingsArray[] = {5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    
+    readSettings(&game, settingsArray);
+
     initBall();
     initBars();
-    Brick brArray[MAX_BRICKS];
+
+    initBrickArray(game.brArray);
     
     /**
      * loop = 1 --> fenêtre SDL active
@@ -108,6 +114,8 @@ int main() {
             img = IMG_Load("img/bar.png");
             SDL_BlitSurface(img, NULL, screen, &center);
 
+            /* Briques */
+            if (brCount > 0) drawBrick();
 
             moveBall();
 
