@@ -8,7 +8,7 @@
 void initBall() {
     b.speed = 1;
     b.x = 392;
-    b.y = 292;
+    b.y = 100;
     b.dx = 1;
     b.dy = 1;
     printf("Balle initialisée\n");

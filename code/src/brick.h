@@ -25,7 +25,7 @@ int brCount;
 
 
 Brick initBrick(int x, int y, int bonus);
-void initBrickArray(Brick **brArray);
+void initBrickArray(Brick brArray[600][300]);
 void drawBrick();
 void deathBrick();
 

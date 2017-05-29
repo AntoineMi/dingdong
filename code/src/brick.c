@@ -12,31 +12,32 @@ Brick initBrick(int x, int y, int bonus) {
     return br;
 }
 
-void initBrickArray(Brick **brArray) {
-    int gridX = 385 - ((brArrayW * 30) / 2);
-    int gridY = 285 - ((brArrayH * 30) / 2);
+void initBrickArray(Brick brArray[600][300]) {
+    int gridX = 385 - ((brArrayW * 30));
+    int gridY = 285 - ((brArrayH * 30));
     
     int i, j;
-    for (i = 0; i < game.gridW; i++) {
-        for (j = 0; j < game.gridH; j++) {
+    for (i = 0; i < game.gridH; i++) {
+        for (j = 0; j < game.gridW; j++) {
             brArray[i][j] = initBrick(gridX, gridY, settingsArray[i]);
-            gridY += 30;
+            gridX += 30;
         }
-        gridY = 285 - ((brArrayH * 30) / 2);
-        gridX += 30;
+        gridX = 385 - ((brArrayW * 30) / 2);
+        gridY += 30;
     }
 }
 
 void drawBrick() {
-    int i;
-    for (i = 2; i < brCount; i++) {
-        center.x = brArray[i].x;
-        center.y = brArray[i].y;
-        center.h = 30;
-        center.w = 30;
-        img = IMG_Load("img/brick.png");
-        SDL_BlitSurface(img, NULL, screen, &center);
-        printf("i = %d\n", i);
+    int i, j;
+    for (i = 0; i < game.gridH; i++) {
+        for (j = 0; j < game.gridW; j++) {
+            center.x = game.brArray[i][j].x;
+            center.y = game.brArray[i][j].y;
+            center.h = 30;
+            center.w = 30;
+            img = IMG_Load("img/brick.png");
+            SDL_BlitSurface(img, NULL, screen, &center);
+        }   
     }
 }
 

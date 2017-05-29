@@ -32,6 +32,4 @@ void readSettings(Game *game, int *settingsArray) {
     else if (game->gridH < 0) {
         game->gridH = 0;
     }
-
-    Brick brArray[game->gridW * game->gridH];
 }

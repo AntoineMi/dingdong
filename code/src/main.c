@@ -59,8 +59,8 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
-    Game game;
-    int settingsArray[] = {5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    
+    int settingsArray[] = {8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
     readSettings(&game, settingsArray);
 
@@ -115,10 +115,9 @@ int main() {
             SDL_BlitSurface(img, NULL, screen, &center);
 
             /* Briques */
-            if (brCount > 0) drawBrick();
+            drawBrick();
 
             moveBall();
-
             
             /*drawBrick(br);*/
 

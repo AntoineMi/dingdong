@@ -9,8 +9,10 @@
 
 typedef struct Game {
     int gridW, gridH;
-    Brick **brArray[600][300];
+    Brick brArray[600][300];
 } Game;
+
+Game game;
 
 SDL_Surface *framebuffer;
 SDL_Surface *screen;
