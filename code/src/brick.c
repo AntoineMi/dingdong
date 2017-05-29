@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "brick.h"
 #include "game.h"
+#include "ball.h"
 
 Brick initBrick(int x, int y, int bonus) {
     Brick br;
@@ -28,18 +29,47 @@ void initBrickArray(Brick brArray[600][300]) {
     }
 }
 
-void drawBrick() {
+void drawBricks() {
     int i, j;
     for (i = 0; i < game.gridH; i++) {
         for (j = 0; j < game.gridW; j++) {
-            center.x = game.brArray[i][j].x;
-            center.y = game.brArray[i][j].y;
-            center.h = 30;
-            center.w = 30;
-            img = IMG_Load("img/brick.png");
-            SDL_BlitSurface(img, NULL, screen, &center);
-        }   
+            if (game.brArray[i][j].alive) {
+                center.x = game.brArray[i][j].x;
+                center.y = game.brArray[i][j].y;
+                center.h = 30;
+                center.w = 30;
+                img = IMG_Load("img/brick.png");
+                SDL_BlitSurface(img, NULL, screen, &center);
+            }
+        }
     }
+}
+
+void deathBrick(Brick *br) {
+    br->alive = 0;
+
+}
+
+int checkCollide(int x, int y) {
+    int collision = 0;
+
+    int i, j;
+    for (i = 0; i < game.gridH; i++) {
+        for (j = 0; j < game.gridW; j++) {
+            if((x > game.brArray[i][j].x + 30)  /* droite */
+            || (x + 30 < game.brArray[i][j].x)  /* gauche */
+            || (y > game.brArray[i][j].y + 30)  /* bas */
+            || (y + 30 < game.brArray[i][j].y)) /* haut */
+                collision = 0;
+            else if (game.brArray[i][j].alive) {
+                collision = 1;
+                deathBrick(&game.brArray[i][j]);
+            }
+            else
+                collision = 0;
+        }
+    }
+    return collision;
 }
 
 
@@ -55,7 +85,7 @@ void drawSquare() {
     glEnd();
 }
 
-void drawBrick(Brick br) {
+void drawBricks(Brick br) {
     glPushMatrix();
         glTranslatef(br.x, br.y, 0);
         glScalef(50, 50, 0);

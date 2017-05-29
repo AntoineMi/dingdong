@@ -1,3 +1,5 @@
+#include "ball.h"
+
 #ifndef HEADER_BRICK
 #define HEADER_BRICK
 
@@ -26,8 +28,10 @@ int brCount;
 
 Brick initBrick(int x, int y, int bonus);
 void initBrickArray(Brick brArray[600][300]);
-void drawBrick();
-void deathBrick();
+void drawBricks();
+void deathBrick(Brick *br);
+
+int checkCollide(int x, int y);
 
 void readSettings();
 

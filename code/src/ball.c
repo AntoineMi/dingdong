@@ -4,6 +4,7 @@
 #include "ball.h"
 #include "bar.h"
 #include "game.h"
+#include "brick.h"
 
 void initBall() {
     b.speed = 1;
@@ -39,8 +40,12 @@ void deathBall() {
 
 void moveBall() {
     if(b.dx != 0 || b.dy != 0) {
+
+        /* position au prochain draw */
         targetX = b.x + b.dx * b.speed;
         targetY = b.y + b.dy * b.speed;
+
+        /* limites zone de jeu */
         if (targetX > 8 && targetX < 792) {
             b.x = targetX;
         }
@@ -61,5 +66,11 @@ void moveBall() {
              b.x <= (bar2.x - 5) + 105 &&
              b.y == 564))
             bounceBall(0);
+
+        /* briques */
+        if (checkCollide(targetX, targetY, &b)) {
+            bounceBall(1);
+        }
+        
     }
 }

@@ -115,11 +115,9 @@ int main() {
             SDL_BlitSurface(img, NULL, screen, &center);
 
             /* Briques */
-            drawBrick();
+            drawBricks();
 
             moveBall();
-            
-            /*drawBrick(br);*/
 
 
 
