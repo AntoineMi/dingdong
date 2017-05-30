@@ -83,15 +83,13 @@ int main() {
     game.theme = 0;
     int idMenu = 1;
     int gameStart = 0;
-    music = Mix_LoadMUS("img/gta/title.mp3");
-    Mix_PlayMusic(music, -1);
+    
 
     initBrickArray(game.brArray);
-
-
+    playMusic(game.theme, 0);
 
     int loop = 1;
-    while(loop) {        
+    while(loop) {
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
@@ -99,13 +97,18 @@ int main() {
         SDL_PumpEvents(); /* Récupérer un tableau d'events */
         keyboard = SDL_GetKeyState(NULL);
 
-
-
-        /* DESSIN */
+        /* MENU */
 
         while (!gameStart) {
             gameStart = menu(&idMenu);
         }
+
+
+        /* JEU */
+
+        Mix_HaltMusic();
+        
+
 
             /* Zone de jeu */
             center.x = 800;
@@ -178,6 +181,7 @@ int main() {
     } /* fin du loop */
     
     Mix_FreeMusic(music);
+    Mix_CloseAudio();
     SDL_Quit();
     
     return EXIT_SUCCESS;

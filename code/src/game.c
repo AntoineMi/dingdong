@@ -1,6 +1,7 @@
+#include <stdio.h>
+#include <SDL/SDL_mixer.h>
 #include "game.h"
 #include "brick.h"
-#include <stdio.h>
 
 void readSettings(Game *game, int *settingsArray) {
     /* READ SETTINGS FROM FILE
@@ -97,11 +98,36 @@ void showMenu(int id) {
     SDL_Flip(screen);
 }
 
+void playMusic(int theme, int title) {
+    if (!title) { /* title */
+        if (!theme) {  /* classic */
+            music = Mix_LoadMUS("img/classic/title.mp3");
+            Mix_PlayMusic(music, -1);
+        } else { /* gta */
+            music = Mix_LoadMUS("img/gta/title.mp3");
+            Mix_PlayMusic(music, -1);
+        }
+    }
+    else { /* game */
+        if (!theme) { /* classic */
+            music = Mix_LoadMUS("img/classic/game.mp3");
+            Mix_PlayMusic(music, -1);
+        } else { /* gta */
+            music = Mix_LoadMUS("img/gta/game.mp3");
+            Mix_PlayMusic(music, -1);
+        }
+    }
+}
+
 int menu(int *idMenu) {
     SDL_Event e;
     SDL_PollEvent(&e);
 
-        if (e.key.keysym.sym == SDLK_ESCAPE) SDL_Quit();
+        if (e.key.keysym.sym == SDLK_ESCAPE) {
+            Mix_FreeMusic(music);
+            Mix_CloseAudio();
+            SDL_Quit();
+        }
 
             switch (*idMenu) {
                 case 1:
@@ -132,7 +158,9 @@ int menu(int *idMenu) {
                     showMenu(4);
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         e.key.keysym.sym = SDLK_DELETE;
-                        printf("dez dez y'a pas de thèmes\n");
+                        playMusic(game.theme, 0);
+                        game.theme = (game.theme == 0) ? 1 : 0;
+                        printf("theme is now %d\n", game.theme);
                         break;
                     }
                     if (e.key.keysym.sym == SDLK_UP) {

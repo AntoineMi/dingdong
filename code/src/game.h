@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
 #include "brick.h"
 
 typedef struct Game {
@@ -26,6 +27,7 @@ FILE *fp;
 
 int menu(int *idMenu);
 void showMenu(int id);
+void playMusic(int theme, int title);
 void readSettings(Game *game, int *settingsArray);
 
 #endif
