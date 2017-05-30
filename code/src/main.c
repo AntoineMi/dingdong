@@ -6,6 +6,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #include "ball.h"
 #include "bar.h"
 #include "brick.h"
@@ -59,30 +60,41 @@ int main() {
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
 
+
     
     int settingsArray[] = {9, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
     readSettings(&game, settingsArray);
 
     initPlayers();
-    initBall(&b1, 392, 100, 1);
-    initBall(&b2, 392, 492, 2);
+    initBall(&b1, 392, 100, 1, 1);
+    initBall(&b2, 392, 492, -1, 2);
     initBars();
 
+    game.theme = 0;
+    int idMenu = 1;
+    int gameStart = 0;
+
     initBrickArray(game.brArray);
-    
-    /**
-     * loop = 1 --> fenêtre SDL active
-     * loop = 0 --> sortie
-     */
+
+
+
     int loop = 1;
-    while(loop) {
-        
+    while(loop) {        
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
         SDL_BlitSurface(framebuffer, NULL, screen, NULL);
 
+        SDL_PumpEvents(); /* Récupérer un tableau d'events */
+        keyboard = SDL_GetKeyState(NULL);
+
+
+
         /* DESSIN */
+
+        while (!gameStart) {
+            gameStart = menu(&idMenu);
+        }
 
             /* Zone de jeu */
             center.x = 800;
@@ -109,10 +121,6 @@ int main() {
         moveBall(&b1);
         moveBall(&b2);
 
-
-
-        SDL_PumpEvents(); /* Récupérer un tableau d'events */
-            keyboard = SDL_GetKeyState(NULL);
 
         /* Déplacement joueur 1 */
         if (keyboard[SDLK_LEFT]) moveBar(&bar1, 1);

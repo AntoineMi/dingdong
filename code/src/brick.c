@@ -56,7 +56,7 @@ int checkCollide(int x, int y) {
     int i, j;
     for (i = 0; i < game.gridH; i++) {
         for (j = 0; j < game.gridW; j++) {
-            if((x > game.brArray[i][j].x + 30)  /* droite */
+            if ((x > game.brArray[i][j].x + 30)  /* droite */
             || (x + 30 < game.brArray[i][j].x)  /* gauche */
             || (y > game.brArray[i][j].y + 30)  /* bas */
             || (y + 30 < game.brArray[i][j].y)) /* haut */

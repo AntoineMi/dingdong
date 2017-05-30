@@ -10,6 +10,8 @@
 typedef struct Game {
     int gridW, gridH;
     Brick brArray[600][300];
+    int theme;
+    int ia;
 } Game;
 
 Game game;
@@ -21,7 +23,8 @@ SDL_Rect center;
 
 FILE *fp;
 
-void initGame();
+int menu(int *idMenu);
+void showMenu(int id);
 void readSettings(Game *game, int *settingsArray);
 
 #endif

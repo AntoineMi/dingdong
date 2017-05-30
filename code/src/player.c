@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "player.h"
 #include "ball.h"
 #include "bar.h"
@@ -16,8 +18,16 @@ void initPlayers() {
 
 int checkHealth(Player *p, Ball *b, Bar bar) {
     if (p->health > 1) {
+        int y, dy;
+        if (p->id == 1) {
+            y = 100;
+            dy = 1;
+        } else {
+            y = 492;
+            dy = -1;
+        }
         p->health--;
-        initBall(b, bar.x, (p->id == 1) ? 100 : 492, p->id);
+        initBall(b, bar.x, y, dy, p->id);
         return 1;
     }
     else return 0;

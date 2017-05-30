@@ -7,12 +7,12 @@
 #include "brick.h"
 #include "player.h"
 
-void initBall(Ball *b, int x, int y, int owner) {
+void initBall(Ball *b, int x, int y, int dy, int owner) {
     b->speed = 1;
     b->x = x;
     b->y = y;
     b->dx = 1;
-    b->dy = 1;
+    b->dy = dy;
     b->owner = owner;
 }
 
@@ -37,7 +37,7 @@ void deathBall(Ball *b) {
     int gameOver = 0;
 
     /* joueur 1 */
-    if (owner) {
+    if (owner == 1) {
         if (checkHealth(&p1, b, bar1)) {
             printf("Vie J1 : %d\n", p1.health);
         } else {
@@ -46,7 +46,7 @@ void deathBall(Ball *b) {
     }
 
     /* joueur 2 */
-    else {
+    else if (owner == 2) {
         if (checkHealth(&p2, b, bar2)) {
             printf("Vie J2 : %d\n", p2.health);
         } else {
@@ -83,18 +83,22 @@ void moveBall(Ball *b) {
         }
 
         /* barres */
-        if ((b->x >= bar1.x &&
-             b->x <= (bar1.x - 5) + 105 &&
-             b->y == 20) ||
-            (b->x >= bar2.x &&
-             b->x <= (bar2.x - 5) + 105 &&
-             b->y == 564))
+        if (b->x >= bar1.x
+        && b->x <= (bar1.x - 5) + 105
+        && b->y == 20) {
+            b->owner = 1;
             bounceBall(b, 0);
+        }
+        if (b->x >= bar2.x
+        && b->x <= (bar2.x - 5) + 105
+        && b->y == 564) {
+            b->owner = 2;
+            bounceBall(b, 0);
+        }
 
         /* briques */
         if (checkCollide(targetX, targetY)) {
             bounceBall(b, 1);
-        }
-        
+        } 
     }
 }

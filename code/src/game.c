@@ -1,5 +1,6 @@
 #include "game.h"
 #include "brick.h"
+#include <stdio.h>
 
 void readSettings(Game *game, int *settingsArray) {
     /* READ SETTINGS FROM FILE
@@ -32,4 +33,150 @@ void readSettings(Game *game, int *settingsArray) {
     else if (game->gridH < 0) {
         game->gridH = 0;
     }
+}
+
+void showMenu(int id) {
+    center.x = 0;
+    center.y = 0;
+    center.h = 1000;
+    center.w = 600;
+    
+    if (!game.theme) { /* classic */
+        switch (id) {
+            case 1:
+                img = IMG_Load("img/classic/1.png");
+                break;
+            case 2:
+                img = IMG_Load("img/classic/1_clk.png");
+                break;
+            case 3:
+                img = IMG_Load("img/classic/2_1.png");
+                break;
+            case 4:
+                img = IMG_Load("img/classic/2_2.png");
+                break;
+            case 5:
+                img = IMG_Load("img/classic/3_1.png");
+                break;
+            case 6:
+                img = IMG_Load("img/classic/3_2.png");
+                break;
+            case 7:
+                img = IMG_Load("img/classic/gameOver.png");
+                break;
+        }
+    }
+
+    else { /* gta */
+        switch (id) {
+            case 1:
+                img = IMG_Load("img/gta/1.png");
+                break;
+            case 2:
+                img = IMG_Load("img/gta/1_clk.png");
+                break;
+            case 3:
+                img = IMG_Load("img/gta/2_1.png");
+                break;
+            case 4:
+                img = IMG_Load("img/gta/2_2.png");
+                break;
+            case 5:
+                img = IMG_Load("img/gta/3_1.png");
+                break;
+            case 6:
+                img = IMG_Load("img/gta/3_2.png");
+                break;
+            case 7:
+                img = IMG_Load("img/gta/gameOver.png");
+                break;
+        }
+    }
+
+    SDL_BlitSurface(img, NULL, screen, &center);
+    SDL_Flip(screen);
+}
+
+int menu(int *idMenu) {
+    SDL_Event e;
+    SDL_PollEvent(&e);
+
+        if (e.key.keysym.sym == SDLK_ESCAPE) SDL_Quit();
+
+            switch (*idMenu) {
+                case 1:
+                    showMenu(1);
+                    if (e.key.keysym.sym == SDLK_RETURN) *idMenu = 2;
+                    e.key.keysym.sym = SDLK_DELETE;
+                    break;
+                case 2:
+                    e.key.keysym.sym = SDLK_DELETE;
+                    showMenu(2);
+                    SDL_Delay(100);
+                    *idMenu = 3;
+                    break;
+                case 3:
+                    showMenu(3);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 5;
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_DOWN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 4;
+                        break;
+                    }
+                    break;
+                case 4:
+                    showMenu(4);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        printf("dez dez y'a pas de thèmes\n");
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_UP) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 3;
+                        break;
+                    }
+                    break;
+                case 5:
+                    showMenu(5);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        printf("1 JOUEUR\n");
+                        return 1;
+                    }
+                    if (e.key.keysym.sym == SDLK_DOWN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 6;
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_BACKSPACE) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 3;
+                        break;
+                    }
+                    break;
+                case 6:
+                    showMenu(6);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        printf("2 JOUEURS\n");
+                        return 1;
+                    }
+                    if (e.key.keysym.sym == SDLK_UP) {
+                        *idMenu = 5;
+                        e.key.keysym.sym = SDLK_DELETE;
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_BACKSPACE) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 3;
+                        break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return 0;
 }

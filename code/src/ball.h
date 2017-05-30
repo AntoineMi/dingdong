@@ -11,7 +11,7 @@ typedef struct Ball {
     int owner;
 } Ball;
 
-void initBall(Ball *b, int x, int y, int owner);
+void initBall(Ball *b, int x, int y, int dy, int owner);
 void drawBall(Ball b);
 void moveBall(Ball *b);
 void deathBall(Ball *b);
