@@ -54,6 +54,15 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    if(-1 == (Mix_OpenAudio(
+      44100,
+      MIX_DEFAULT_FORMAT,
+      MIX_DEFAULT_CHANNELS,
+      1024))) {
+        fprintf(stderr, "Erreur d'initialisation de l'API Mixer. Fin du programme.\n");
+        return EXIT_FAILURE;
+   }
+
     /******************************************
      *               CODE DU JEU              *
      ******************************************/
@@ -74,6 +83,8 @@ int main() {
     game.theme = 0;
     int idMenu = 1;
     int gameStart = 0;
+    music = Mix_LoadMUS("img/gta/title.mp3");
+    Mix_PlayMusic(music, -1);
 
     initBrickArray(game.brArray);
 
@@ -165,7 +176,8 @@ int main() {
         /* Afficher à l'écran */
         SDL_Flip(screen);
     } /* fin du loop */
-  
+    
+    Mix_FreeMusic(music);
     SDL_Quit();
     
     return EXIT_SUCCESS;

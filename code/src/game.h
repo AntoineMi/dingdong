@@ -20,6 +20,7 @@ SDL_Surface *framebuffer;
 SDL_Surface *screen;
 SDL_Surface *img;
 SDL_Rect center;
+Mix_Music *music;
 
 FILE *fp;
 
