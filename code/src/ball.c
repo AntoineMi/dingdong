@@ -5,13 +5,15 @@
 #include "bar.h"
 #include "game.h"
 #include "brick.h"
+#include "player.h"
 
-void initBall(Ball *b, int x, int y) {
+void initBall(Ball *b, int x, int y, int owner) {
     b->speed = 1;
     b->x = x;
     b->y = y;
     b->dx = 1;
     b->dy = 1;
+    b->owner = owner;
 }
 
 void drawBall(Ball b) {
@@ -31,9 +33,33 @@ void bounceBall(Ball *b, int isSide) {
 }
 
 void deathBall(Ball *b) {
-    b->dx = 0;
-    b->dy = 0;
-    printf("Game over!\n");
+    int owner = b->owner;
+    int gameOver = 0;
+
+    /* joueur 1 */
+    if (owner) {
+        if (checkHealth(&p1, b, bar1)) {
+            printf("Vie J1 : %d\n", p1.health);
+        } else {
+            gameOver = 1;
+        }
+    }
+
+    /* joueur 2 */
+    else {
+        if (checkHealth(&p2, b, bar2)) {
+            printf("Vie J2 : %d\n", p2.health);
+        } else {
+            gameOver = 1;
+        }
+    }
+
+    if (gameOver) {
+        b->dx = 0;
+        b->dy = 0;
+        printf("Game over!\n");
+    }
+    
 }
 
 void moveBall(Ball *b) {

@@ -7,10 +7,11 @@
 typedef struct Ball {
     int x, y;
     float dx, dy;
-    unsigned int speed;
+    int speed;
+    int owner;
 } Ball;
 
-void initBall(Ball *b, int x, int y);
+void initBall(Ball *b, int x, int y, int owner);
 void drawBall(Ball b);
 void moveBall(Ball *b);
 void deathBall(Ball *b);

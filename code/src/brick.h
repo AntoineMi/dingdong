@@ -1,7 +1,7 @@
-#include "ball.h"
-
 #ifndef HEADER_BRICK
 #define HEADER_BRICK
+
+#include "ball.h"
 
 #define MAX_BRICKS_W 600 /* 600px */
 #define MAX_BRICKS_H 300 /* 300px */

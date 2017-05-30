@@ -64,8 +64,9 @@ int main() {
     
     readSettings(&game, settingsArray);
 
-    initBall(&b1, 392, 100);
-    initBall(&b2, 392, 492);
+    initPlayers();
+    initBall(&b1, 392, 100, 1);
+    initBall(&b2, 392, 492, 2);
     initBars();
 
     initBrickArray(game.brArray);
@@ -97,24 +98,16 @@ int main() {
             drawBall(b2);
             
             /* Barres */
-            center.x = bar1.x;
-            center.y = bar1.y;
-            center.h = 10;
-            center.w = 100;
-            img = IMG_Load("img/bar.png");
-            SDL_BlitSurface(img, NULL, screen, &center);
-
-            center.x = bar2.x;
-            center.y = bar2.y;
-            center.h = 10;
-            center.w = 100;
-            img = IMG_Load("img/bar.png");
-            SDL_BlitSurface(img, NULL, screen, &center);
+            drawBar(bar1);
+            drawBar(bar2);
 
             /* Briques */
             drawBricks();
 
-            moveBall(&b1);
+        /* JEU */
+
+        moveBall(&b1);
+        moveBall(&b2);
 
 
 
@@ -158,11 +151,6 @@ int main() {
               break;
           }
         }
-
-        /* print to file
-        testFile = fopen ("src/settings", "w+");
-        fprintf(testFile, "%d\n", b.speed);
-        fclose(testFile); */
 
         /******************************************/
 

@@ -1,10 +1,14 @@
+#ifndef HEADER_BAR
+#define HEADER_BAR
+
 /**
  * Barre avec une position x, y, une vitesse et une longueur
  */
 typedef struct Bar {
     int x, y;
-    unsigned int speed;
-    unsigned int length;
+    int speed;
+    int length;
+    int owner;
 } Bar;
 
 /**
@@ -13,7 +17,11 @@ typedef struct Bar {
  * @param dir Direction gauche (1) ou droite (0)
  */
 void moveBar(Bar *bar, int dir);
+
 void initBars();
+void drawBar(Bar bar);
 
 Bar bar1;
 Bar bar2;
+
+#endif
