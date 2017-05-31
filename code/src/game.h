@@ -28,6 +28,7 @@ FILE *fp;
 int menu(int *idMenu);
 void showMenu(int id);
 void playMusic(int theme, int title);
+void setTheme(int theme);
 void readSettings(Game *game, int *settingsArray);
 
 #endif
