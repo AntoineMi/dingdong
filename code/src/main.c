@@ -83,7 +83,6 @@ int main() {
     game.theme = 0;
     int idMenu = 1;
     int gameStart = 0;
-    
 
     initBrickArray(game.brArray);
     playMusic(game.theme, 0);
@@ -103,12 +102,7 @@ int main() {
             gameStart = menu(&idMenu);
         }
 
-
         /* JEU */
-
-        Mix_HaltMusic();
-        
-
 
             /* Zone de jeu */
             center.x = 800;
@@ -131,6 +125,7 @@ int main() {
             drawBricks();
 
         /* JEU */
+
 
         moveBall(&b1);
         moveBall(&b2);

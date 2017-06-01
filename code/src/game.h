@@ -25,6 +25,7 @@ Mix_Music *music;
 
 FILE *fp;
 
+void initGame();
 int menu(int *idMenu);
 void showMenu(int id);
 void playMusic(int theme, int title);

@@ -63,6 +63,12 @@ void showMenu(int id) {
                 img = IMG_Load("img/classic/3_2.png");
                 break;
             case 7:
+                img = IMG_Load("img/classic/4_1.png");
+                break;
+            case 8:
+                img = IMG_Load("img/classic/4_2.png");
+                break;
+            case 9:
                 img = IMG_Load("img/classic/gameOver.png");
                 break;
         }
@@ -89,6 +95,12 @@ void showMenu(int id) {
                 img = IMG_Load("img/gta/3_2.png");
                 break;
             case 7:
+                img = IMG_Load("img/gta/4_1.png");
+                break;
+            case 8:
+                img = IMG_Load("img/gta/4_2.png");
+                break;
+            case 9:
                 img = IMG_Load("img/gta/gameOver.png");
                 break;
         }
@@ -109,6 +121,7 @@ void playMusic(int theme, int title) {
         }
     }
     else { /* game */
+    printf("ENORME SOIREE\n");
         if (!theme) { /* classic */
             music = Mix_LoadMUS("img/classic/game.mp3");
             Mix_PlayMusic(music, -1);
@@ -130,6 +143,7 @@ int menu(int *idMenu) {
         }
 
             switch (*idMenu) {
+                /* écran titre */
                 case 1:
                     showMenu(1);
                     if (e.key.keysym.sym == SDLK_RETURN) *idMenu = 2;
@@ -141,6 +155,8 @@ int menu(int *idMenu) {
                     SDL_Delay(100);
                     *idMenu = 3;
                     break;
+
+                /* accès au jeu ou aux thèmes */
                 case 3:
                     showMenu(3);
                     if (e.key.keysym.sym == SDLK_RETURN) {
@@ -158,9 +174,7 @@ int menu(int *idMenu) {
                     showMenu(4);
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         e.key.keysym.sym = SDLK_DELETE;
-                        playMusic(game.theme, 0);
-                        game.theme = (game.theme == 0) ? 1 : 0;
-                        printf("theme is now %d\n", game.theme);
+                        *idMenu = 7;
                         break;
                     }
                     if (e.key.keysym.sym == SDLK_UP) {
@@ -169,6 +183,8 @@ int menu(int *idMenu) {
                         break;
                     }
                     break;
+
+                /* choix du mode de jeu */
                 case 5:
                     showMenu(5);
                     if (e.key.keysym.sym == SDLK_RETURN) {
@@ -203,6 +219,63 @@ int menu(int *idMenu) {
                         break;
                     }
                     break;
+
+                /* choix du thème */
+                case 7:
+                    showMenu(7);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        if (!game.theme) {
+                            printf("theme is already %d\n", game.theme);
+                            break;
+                        }
+                        else {
+                            game.theme++;
+                            playMusic(game.theme, 0);
+                            printf("theme is now %d\n", game.theme);
+                            *idMenu = 1;
+                            break;
+                        }
+                    }
+                    if (e.key.keysym.sym == SDLK_DOWN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 8;
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_BACKSPACE) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 3;
+                        break;
+                    }
+                    break;
+                case 8:
+                    showMenu(8);
+                    if (e.key.keysym.sym == SDLK_RETURN) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        if (game.theme) {
+                            printf("theme is already %d\n", game.theme);
+                            break;
+                        }
+                        else {
+                            game.theme--;
+                            playMusic(game.theme, 0);
+                            printf("theme is now %d\n", game.theme);
+                            *idMenu = 1;
+                            break;
+                        }
+                    }
+                    if (e.key.keysym.sym == SDLK_UP) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 7;
+                        break;
+                    }
+                    if (e.key.keysym.sym == SDLK_BACKSPACE) {
+                        e.key.keysym.sym = SDLK_DELETE;
+                        *idMenu = 3;
+                        break;
+                    }
+                    break;
+
                 default:
                     break;
             }
