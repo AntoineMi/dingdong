@@ -188,6 +188,7 @@ int menu(int *idMenu) {
                     showMenu(5);
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         printf("1 JOUEUR\n");
+                        game.ia = 1;
                         return 1;
                     }
                     if (e.key.keysym.sym == SDLK_DOWN) {
@@ -205,6 +206,7 @@ int menu(int *idMenu) {
                     showMenu(6);
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         printf("2 JOUEURS\n");
+                        game.ia = 0;
                         return 1;
                     }
                     if (e.key.keysym.sym == SDLK_UP) {

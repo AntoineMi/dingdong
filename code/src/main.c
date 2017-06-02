@@ -81,7 +81,6 @@ int main() {
     initBars();
 
     game.theme = 0;
-    game.ia = 1;
     int idMenu = 1;
     int gameStart = 0;
 
