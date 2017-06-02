@@ -17,6 +17,8 @@ typedef struct Bar {
  * @param dir Direction gauche (1) ou droite (0)
  */
 void moveBar(Bar *bar, int dir);
+Ball closestBall(Bar bar);
+void moveIa(Bar *bar);
 
 void initBars();
 void drawBar(Bar bar);

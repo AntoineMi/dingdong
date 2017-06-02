@@ -13,6 +13,15 @@ void moveBar(Bar *bar, int dir) {
     }
 }
 
+void moveIa(Bar *bar) {
+    Ball *lowestBall = (b1.y < b2.y) ? &b1 : &b2;
+    if (lowestBall->x < bar->x)
+        moveBar(bar, 1);
+
+    else if (lowestBall->x > bar->x)
+        moveBar(bar, 0);
+}
+
 void initBars() {
     bar1.speed = 1;
     bar1.x = 350;

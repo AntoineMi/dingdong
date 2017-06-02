@@ -81,6 +81,7 @@ int main() {
     initBars();
 
     game.theme = 0;
+    game.ia = 1;
     int idMenu = 1;
     int gameStart = 0;
 
@@ -135,9 +136,15 @@ int main() {
         if (keyboard[SDLK_LEFT]) moveBar(&bar1, 1);
         if (keyboard[SDLK_RIGHT]) moveBar(&bar1, 0);
 
-        /* Déplacement joueur 2 */
-        if (keyboard['q']) moveBar(&bar2, 1);
-        if (keyboard['d']) moveBar(&bar2, 0);
+        if (game.ia) {
+            moveIa(&bar2);
+        }
+        else {
+            /* Déplacement joueur 2 */
+            if (keyboard['q']) moveBar(&bar2, 1);
+            if (keyboard['d']) moveBar(&bar2, 0);
+        }
+
 
         if (keyboard[SDLK_ESCAPE]) loop = 0;
 

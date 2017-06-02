@@ -121,7 +121,6 @@ void playMusic(int theme, int title) {
         }
     }
     else { /* game */
-    printf("ENORME SOIREE\n");
         if (!theme) { /* classic */
             music = Mix_LoadMUS("img/classic/game.mp3");
             Mix_PlayMusic(music, -1);
