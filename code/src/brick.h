@@ -8,9 +8,6 @@
 #define MAX_BRICKS 200
 #define BRICK_SIZE 30
 
-/**
- * Brique avec une position x, y, un état alive/dead et une couleur RVB
- */
 typedef struct Brick {
     int x, y;
     int alive;
@@ -25,7 +22,6 @@ int brCount;
 
 /*Brick brArray[] = malloc(sizeof(Brick) * MAX_BRICKS);*/
 
-
 Brick initBrick(int x, int y, int bonus);
 void initBrickArray(Brick brArray[600][300]);
 void drawBricks();
@@ -34,12 +30,5 @@ void deathBrick(Brick *br, Ball *b);
 int checkCollide(int x, int y, Ball *b);
 
 void readSettings();
-
-
-/* OpenGL
-void drawSquare();
-void drawBrick(Brick br);
-
-*/
 
 #endif

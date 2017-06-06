@@ -41,7 +41,7 @@ void deathBall(Ball *b) {
     /* joueur 1 */
     if (owner == 1) {
         if (checkScore(&p1, b, &bar1)) {
-            printf("Score J1 : %d\n", p1.score);
+            /*printf("Score J1 : %d\n", p1.score);*/
         } else {
             gameOver = 1;
         }
@@ -50,7 +50,7 @@ void deathBall(Ball *b) {
     /* joueur 2 */
     else if (owner == 2) {
         if (checkScore(&p2, b, &bar2)) {
-            printf("Score J2 : %d\n", p2.score);
+            /*printf("Score J2 : %d\n", p2.score);*/
         } else {
             gameOver = 1;
         }
@@ -69,7 +69,7 @@ void deathBall(Ball *b) {
             img = IMG_Load("img/classic/gameOver.png");
         else img = IMG_Load("img/gta/gameOver.png");
 
-        printf("Game over!\n");
+        /*printf("Game over!\n");*/
         SDL_BlitSurface(img, NULL, screen, &center);
         SDL_Flip(screen);
         SDL_Delay(5000);

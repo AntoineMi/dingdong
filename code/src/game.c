@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <SDL/SDL_mixer.h>
+
 #include "game.h"
 #include "brick.h"
 
@@ -204,7 +205,7 @@ int menu(int *idMenu) {
                 case 5:
                     showMenu(5);
                     if (e.key.keysym.sym == SDLK_RETURN) {
-                        printf("1 JOUEUR\n");
+                        /*printf("1 JOUEUR\n");*/
                         game.ia = 1;
                         return 1;
                     }
@@ -222,7 +223,7 @@ int menu(int *idMenu) {
                 case 6:
                     showMenu(6);
                     if (e.key.keysym.sym == SDLK_RETURN) {
-                        printf("2 JOUEURS\n");
+                        /*printf("2 JOUEURS\n");*/
                         game.ia = 0;
                         return 1;
                     }
@@ -244,13 +245,13 @@ int menu(int *idMenu) {
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         e.key.keysym.sym = SDLK_DELETE;
                         if (!game.theme) {
-                            printf("theme is already %d\n", game.theme);
+                            /*printf("le thème est déjà %d\n", game.theme);*/
                             break;
                         }
                         else {
                             game.theme++;
                             playMusic(game.theme, 0);
-                            printf("theme is now %d\n", game.theme);
+                            /*printf("le thème est à présent %d\n", game.theme);*/
                             *idMenu = 1;
                             break;
                         }
@@ -271,13 +272,13 @@ int menu(int *idMenu) {
                     if (e.key.keysym.sym == SDLK_RETURN) {
                         e.key.keysym.sym = SDLK_DELETE;
                         if (game.theme) {
-                            printf("theme is already %d\n", game.theme);
+                            /*printf("le thème est déjà %d\n", game.theme);*/
                             break;
                         }
                         else {
                             game.theme--;
                             playMusic(game.theme, 0);
-                            printf("theme is now %d\n", game.theme);
+                            /*printf("le thème est à présent %d\n", game.theme);*/
                             *idMenu = 1;
                             break;
                         }

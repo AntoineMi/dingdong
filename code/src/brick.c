@@ -1,5 +1,6 @@
-#include <GL/gl.h>
 #include <stdio.h>
+#include <GL/gl.h>
+
 #include "brick.h"
 #include "game.h"
 #include "ball.h"
@@ -18,7 +19,7 @@ Brick initBrick(int x, int y, int bonus) {
 void initBrickArray(Brick brArray[600][300]) {
     int gridX = 385 - ((game.gridW * 30) / 2) + 15;
     int gridY = 285 - ((game.gridH * 30) / 2) + 15;
-    printf("gridX = %d\ngridY = %d\n", gridX, gridY);
+    /*printf("gridX = %d\ngridY = %d\n", gridX, gridY);*/
     
     int i, j;
     for (i = 0; i < game.gridH; i++) {
@@ -56,22 +57,22 @@ void deathBrick(Brick *br, Ball *b) {
             /* 1 point bonus */
             case 1:
                 p1.score++;
-                printf("pt bonus p1\n");
+                /*printf("pt bonus p1\n");*/
                 break;
             /* malus 1 point */
             case 2:
                 p1.score--;
-                printf("malus pt p1\n");
+                /*printf("malus pt p1\n");*/
                 break;
             /* bonus vitesse */
             case 3:
                 bar1.speed += 1;
-                printf("bonus vitesse p1\n");
+                /*printf("bonus vitesse p1\n");*/
                 break;
             /* malus vitesse */
             case 4:
                 bar1.speed = 0.5;
-                printf("bonus vitesse p1\n");
+                /*printf("bonus vitesse p1\n");*/
                 break;
             default:
                 break;
@@ -83,22 +84,22 @@ void deathBrick(Brick *br, Ball *b) {
         switch (br->bonus) {
             case 1:
                 p2.score++;
-                printf("pt bonus p2\n");
+                /*printf("pt bonus p2\n");*/
                 break;
             /* malus 1 point */
             case 2:
                 p2.score--;
-                printf("malus pt p1\n");
+                /*printf("malus pt p1\n");*/
                 break;
             /* bonus vitesse */
             case 3:
                 bar2.speed += 1;
-                printf("bonus vitesse p2\n");
+                /*printf("bonus vitesse p2\n");*/
                 break;
             /* malus vitesse */
             case 4:
                 bar2.speed = 0.5;
-                printf("malus vitesse p2\n");
+                /*printf("malus vitesse p2\n");*/
                 break;
             default:
                 break;
@@ -106,8 +107,8 @@ void deathBrick(Brick *br, Ball *b) {
         p2.score++;
     }
 
-    printf("\nscore p1 : %d\n", p1.score);
-    printf("score p2 : %d\n", p2.score);
+    /*printf("\nscore p1 : %d\n", p1.score);*/
+    /*printf("score p2 : %d\n", p2.score);*/
 }
 
 int checkCollide(int x, int y, Ball *b) {

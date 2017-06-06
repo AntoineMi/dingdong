@@ -1,7 +1,7 @@
 #include <stdio.h>
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+
 #include "player.h"
 #include "game.h"
 #include "ball.h"
@@ -45,15 +45,29 @@ void showScore() {
     else img = IMG_Load("img/gta/score.png");
 
     /* score j1 */
-    x = 850;
-    y = 20;
+    x = 845;
+    y = 135;
     for (i = 0; i <= p1.score; i++) {
         center.x = x;
         center.y = y;
         SDL_BlitSurface(img, NULL, screen, &center);
         x += 20;
         if ((i%5 == 0) && (i != 0)) {
-            x = 800;
+            x = 845;
+            y += 20;
+        }        
+    }
+
+    /* score j2 */
+    x = 845;
+    y = 450;
+    for (i = 0; i <= p2.score; i++) {
+        center.x = x;
+        center.y = y;
+        SDL_BlitSurface(img, NULL, screen, &center);
+        x += 20;
+        if ((i%5 == 0) && (i != 0)) {
+            x = 845;
             y += 20;
         }        
     }

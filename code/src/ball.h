@@ -1,9 +1,6 @@
 #ifndef HEADER_BALL
 #define HEADER_BALL
 
-/**
- * Balle avec une position x, y et une vitesse
- */
 typedef struct Ball {
     int x, y;
     float dx, dy;
