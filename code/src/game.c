@@ -4,22 +4,39 @@
 #include "brick.h"
 
 void readSettings(Game *game, int *settingsArray) {
-    /* READ SETTINGS FROM FILE
-
-    fp = fopen("settings","r");
-
-    if(fp == NULL)
-        printf("Error while opening the file.\n");
+    fp = fopen("data/settings", "r");
+    char line[100];
+    char *l;
     
-    while( ( ch = fgetc(fp) ) != EOF )
-        printf("%c",ch);
-    
- 
+    if (fp != NULL) {
+        /* 1ère ligne */
+        fgets(line, 100, fp);
+        l = line;
+
+        game->gridW = strtol(l, &l, 0);
+        game->gridH = strtol(l, &l, 0);
+
+        /* 2e ligne */
+        fgets(line, 100, fp);
+        l = line;
+
+        int i, j, b;
+        for (i = 0; i < game->gridW; i++) {
+            for (j = 0; j < game->gridH; j++) {
+                b = strtol(l, &l, 0);
+                settingsArray[i + j] = b;
+            }
+        }
+    }
+
     fclose(fp);
-    */
 
+    /* ***** */
+
+    /*
     game->gridW = settingsArray[0];
     game->gridH = settingsArray[1];
+    */
 
     if (game->gridW * BRICK_SIZE > MAX_BRICKS_W) {
         game->gridW = MAX_BRICKS_W / BRICK_SIZE;
@@ -281,4 +298,15 @@ int menu(int *idMenu) {
                     break;
             }
             return 0;
+}
+
+void drawArea() {
+    center.x = 800;
+    center.y = 0;
+    center.h = 200;
+    center.w = 600;
+    if (!game.theme)
+        img = IMG_Load("img/classic/bg_ui.png");
+    else img = IMG_Load("img/gta/bg_ui.png");
+        SDL_BlitSurface(img, NULL, screen, &center);
 }

@@ -8,13 +8,13 @@
 
 typedef struct Player {
     int score;
-    int health;
     int theme;
     int id;
 } Player;
 
 void initPlayers();
-int checkHealth(Player *p, Ball *b, Bar bar);
+int checkScore(Player *p, Ball *b, Bar *bar);
+void showScore();
 
 Player p1, p2;
 

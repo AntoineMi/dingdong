@@ -3,6 +3,8 @@
 #include "brick.h"
 #include "game.h"
 #include "ball.h"
+#include "player.h"
+#include "bar.h"
 
 Brick initBrick(int x, int y, int bonus) {
     Brick br;
@@ -21,7 +23,7 @@ void initBrickArray(Brick brArray[600][300]) {
     int i, j;
     for (i = 0; i < game.gridH; i++) {
         for (j = 0; j < game.gridW; j++) {
-            brArray[i][j] = initBrick(gridX, gridY, settingsArray[i]);
+            brArray[i][j] = initBrick(gridX, gridY, settingsArray[i + j]);
             gridX += 30;
         }
         gridX = 385 - ((game.gridW * 30) / 2) + 15;
@@ -38,19 +40,77 @@ void drawBricks() {
                 center.y = game.brArray[i][j].y;
                 center.h = 30;
                 center.w = 30;
-                img = IMG_Load("img/brick.png");
+                if (!game.theme)
+                    img = IMG_Load("img/classic/brick.png");
+                else img = IMG_Load("img/gta/brick.png");
                 SDL_BlitSurface(img, NULL, screen, &center);
             }
         }
     }
 }
 
-void deathBrick(Brick *br) {
+void deathBrick(Brick *br, Ball *b) {
     br->alive = 0;
+    if (b->owner == 1) {
+        switch (br->bonus) {
+            /* 1 point bonus */
+            case 1:
+                p1.score++;
+                printf("pt bonus p1\n");
+                break;
+            /* malus 1 point */
+            case 2:
+                p1.score--;
+                printf("malus pt p1\n");
+                break;
+            /* bonus vitesse */
+            case 3:
+                bar1.speed += 1;
+                printf("bonus vitesse p1\n");
+                break;
+            /* malus vitesse */
+            case 4:
+                bar1.speed = 0.5;
+                printf("bonus vitesse p1\n");
+                break;
+            default:
+                break;
+        }
+        p1.score++;
 
+    }
+    else if (b->owner == 2) {
+        switch (br->bonus) {
+            case 1:
+                p2.score++;
+                printf("pt bonus p2\n");
+                break;
+            /* malus 1 point */
+            case 2:
+                p2.score--;
+                printf("malus pt p1\n");
+                break;
+            /* bonus vitesse */
+            case 3:
+                bar2.speed += 1;
+                printf("bonus vitesse p2\n");
+                break;
+            /* malus vitesse */
+            case 4:
+                bar2.speed = 0.5;
+                printf("malus vitesse p2\n");
+                break;
+            default:
+                break;
+        }
+        p2.score++;
+    }
+
+    printf("\nscore p1 : %d\n", p1.score);
+    printf("score p2 : %d\n", p2.score);
 }
 
-int checkCollide(int x, int y) {
+int checkCollide(int x, int y, Ball *b) {
     int collision = 0;
 
     int i, j;
@@ -63,7 +123,7 @@ int checkCollide(int x, int y) {
                 collision = 0;
             else if (game.brArray[i][j].alive) {
                 collision = 1;
-                deathBrick(&game.brArray[i][j]);
+                deathBrick(&game.brArray[i][j], b);
             }
             else
                 collision = 0;

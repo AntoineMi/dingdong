@@ -18,7 +18,7 @@ typedef struct Brick {
 } Brick;
 
 /* Tableau de paramètres */
-int settingsArray[MAX_BRICKS];
+int settingsArray[100];
 
 int brArrayW, brArrayH;
 int brCount;
@@ -29,9 +29,9 @@ int brCount;
 Brick initBrick(int x, int y, int bonus);
 void initBrickArray(Brick brArray[600][300]);
 void drawBricks();
-void deathBrick(Brick *br);
+void deathBrick(Brick *br, Ball *b);
 
-int checkCollide(int x, int y);
+int checkCollide(int x, int y, Ball *b);
 
 void readSettings();
 

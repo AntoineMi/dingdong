@@ -68,10 +68,6 @@ int main() {
      ******************************************/
     
     Uint8 *keyboard = 0; /* tableau de Uint8 */
-
-
-    
-    int settingsArray[] = {9, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
     readSettings(&game, settingsArray);
 
@@ -87,7 +83,8 @@ int main() {
     initBrickArray(game.brArray);
     playMusic(game.theme, 0);
 
-    int loop = 1;
+    loop = 1;
+
     while(loop) {
         /* Nettoyage du framebuffer */
         SDL_FillRect(framebuffer, NULL, SDL_MapRGB(framebuffer->format, 0, 0, 0));
@@ -105,14 +102,8 @@ int main() {
         /* JEU */
 
             /* Zone de jeu */
-            center.x = 800;
-            center.y = 0;
-            center.h = 200;
-            center.w = 600;
-            img = IMG_Load("img/bg_ui.png");
-            SDL_BlitSurface(img, NULL, screen, &center);
-
-
+            drawArea();
+            
             /* Balles */
             drawBall(b1);
             drawBall(b2);
@@ -125,6 +116,8 @@ int main() {
             drawBricks();
 
         /* JEU */
+
+        showScore();
 
 
         moveBall(&b1);

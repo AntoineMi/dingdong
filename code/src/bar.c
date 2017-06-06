@@ -39,6 +39,8 @@ void drawBar(Bar bar) {
     center.y = bar.y;
     center.h = 10;
     center.w = 100;
-    img = IMG_Load("img/bar.png");
+    if (!game.theme)
+        img = IMG_Load("img/classic/bar.png");
+    else img = IMG_Load("img/gta/bar.png");
     SDL_BlitSurface(img, NULL, screen, &center);
 }

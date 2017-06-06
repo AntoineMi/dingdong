@@ -22,6 +22,7 @@ SDL_Surface *screen;
 SDL_Surface *img;
 SDL_Rect center;
 Mix_Music *music;
+int loop;
 
 FILE *fp;
 
@@ -31,5 +32,6 @@ void showMenu(int id);
 void playMusic(int theme, int title);
 void setTheme(int theme);
 void readSettings(Game *game, int *settingsArray);
+void drawArea();
 
 #endif
